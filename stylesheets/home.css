@@ -1,0 +1,97 @@
+body{
+  font-family: Avenir Next;
+  margin: 0;
+}
+#name{
+  color: #D12C2C;
+  position: relative;
+  margin-left: 10px;
+  display: block;
+  top: 0px;
+  text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*This is our heading*/
+#logo{
+  margin: 0px;
+  position: absolute;
+  display: block;
+  background: white;
+  top: 20px;
+  float: left;
+  margin-left: 10px;
+  overflow: visible;
+}
+
+ul {
+    list-style-type: none;
+    margin-left: 10px;
+    padding: 0;
+    overflow: hidden;
+}
+li {
+    right: 10px;
+    display: inline;
+    float: right;
+
+}
+li a{
+  display: block;
+  padding: 14px 16px;
+  text-align: center;
+  text-decoration: none;
+}
+li a{
+  text-decoration: none;
+  position: relative;
+  color: #D12C2C;
+}
+
+a:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  border-bottom: 2px solid #D12C2C;
+  transition: 0.4s;
+}
+
+a:hover:after {
+  width: 85%;
+}
