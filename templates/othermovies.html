@@ -3,11 +3,18 @@
   <head>
     <meta charset="utf-8">
     <title>Other Movies Form</title>
+    <link rel='stylesheet' href='/resources/common.css'>
   </head>
+
+  {% extends "base.html" %}
+
+{% block content %}
   <body>
     <h1>What Are Your Favorite Movies?</h1>
     <form method="post" action='/style'>
       <p><input type='text' name='movie'><input type='submit'></p>
     </form>
   </body>
+{% endblock %}
+
 </html>

@@ -3,11 +3,16 @@
   <head>
     <meta charset="utf-8">
     <title>Cast Form</title>
+    <link rel='stylesheet' href='/resources/common.css'>
   </head>
+
+  {% extends "base.html" %}
+{% block content %}
   <body>
     <h1>What Cast/Actors do You Like?</h1>
     <form method="post" action='/director'>
       <p><input type='text' name='cast'><input type='submit'></p>
     </form>
   </body>
+  {% endblock %}
 </html>
