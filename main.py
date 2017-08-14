@@ -17,26 +17,44 @@
 import jinja2
 import webapp2
 import os
+import unirest
+import time
+from google.appengine.api import urlfetch
+
 
 env = jinja2.Environment(loader=jinja2.FileSystemLoader('templates'))
 
+
 class MainHandler(webapp2.RequestHandler):
     def get(self):
+        # url = 'https://api.themoviedb.org/3/movie/10016?api_key=908b04b14312a6971d28a297db411fd7&language=en-US'
+        # try:
+        #     result = urlfetch.fetch(url)
+        #     if result.status_code == 200:
+        #         self.response.write(result)
+        #     else:
+        #         self.response.status_code = result.status_code
+        # except urlfetch.Error:
+        #     logging.exception('Caught exception fetching url')
+
+        def callback(response):
+            print(str(response.body))
+            self.response.write(response.body)
+
+        params = {'api_key': '908b04b14312a6971d28a297db411fd7'}
+        url = 'https://api.themoviedb.org/3/movie/10016?&language=en-US'
+
+        response = unirest.get(url, params = params, callback = callback)
+        time.sleep(1)
+        # self.response.write(m)
+
+
+        #
+
         template = env.get_template('home.html')
-        vars = {'CompanyName': 'movie night'}
-        self.response.out.write(template.render(vars))
-
-class UserHandler (webapp2.RequestHandler):
-    def get(self):
-        user = users.get_current_user()
-        if user:
-            greeting = ('Welcome, %s! (<a href="%s">sign out</a>)' %
-                (user.nickname(), users.create_logout_url('/')))
-        else:
-            greeting = ('<a href="%s">Sign in or register</a>.' %
-                users.create_login_url('/'))
-
-        self.response.write('<html><body>%s</body></html>' % greeting)
+        vars = {'CompanyName': 'louis.lewis movies'}
+        # self.response.out.write(template.render(vars))
+        # self.response.write()
 
 class GenreHandler(webapp2.RequestHandler):
     def get(self):
@@ -79,7 +97,7 @@ class RecHandler(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
-    ('/login', UserHandler),
+    # ('/login', UserHandler),
     ('/genre', GenreHandler),
     ('/reviews', ReviewsHandler),
     ('/cast', CastHandler),
