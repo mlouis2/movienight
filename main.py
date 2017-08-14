@@ -49,14 +49,17 @@ class GenreHandler(webapp2.RequestHandler):
     def get(self):
         template = env.get_template('genre.html')
         self.response.out.write(template.render())
+
 class ReviewsHandler(webapp2.RequestHandler):
     def post(self):
         template = env.get_template('reviewsform.html')
         self.response.out.write(template.render())
+
 class CastHandler(webapp2.RequestHandler):
     def post(self):
         template = env.get_template('cast.html')
         self.response.out.write(template.render())
+
 class OtherMoviesHandler(webapp2.RequestHandler):
     def post(self):
         template = env.get_template('othermovies.html')
@@ -65,29 +68,25 @@ class RatingHandler(webapp2.RequestHandler):
     def post(self):
         template = env.get_template('rating.html')
         self.response.out.write(template.render())
+
 class DirectorHandler(webapp2.RequestHandler):
     def post(self):
         template = env.get_template('director.html')
         self.response.out.write(template.render())
+
 class StyleHandler(webapp2.RequestHandler):
     def post(self):
         template = env.get_template('style.html')
         self.response.out.write(template.render())
+
 class RecHandler(webapp2.RequestHandler):
     def post(self):
         template = env.get_template('recommendations.html')
-
         self.response.out.write(template.render({self.request.get('genre')}))
-
-
-
-
-
-
-
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
+    ('/login', UserHandler),
     ('/genre', GenreHandler),
     ('/reviews', ReviewsHandler),
     ('/cast', CastHandler),
