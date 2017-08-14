@@ -2,12 +2,19 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title>Reviews Form</title>
+    <link rel='stylesheet' href='/resources/common.css'>
   </head>
+
+  {% extends "base.html" %}
+
+{% block content %}
   <body>
   <h1>Minimum Number of Stars?</h1>
     <form method="post" action="/cast">
       <p><input type='text' name='reviews'><input type='submit'></p>
     </form>
   </body>
+{% endblock %}
+
 </html>

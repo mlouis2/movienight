@@ -1,9 +1,9 @@
-body{
+header{
   font-family: Avenir Next;
   margin: 0;
 }
 #name{
-  color: #D12C2C;
+  color: white;
   position: relative;
   margin-left: 10px;
   display: block;
@@ -13,6 +13,9 @@ left: 120px;
 
 h1{
   position: relative;
+  font-family: American Typewriter;
+  font-weight: lighter;
+  font-size: 60px;
   top: 200px;
   text-align: center;
 }
@@ -61,7 +64,7 @@ p{
 #logo{
   margin: 0px;
   position: absolute;
-  display: block;
+  display: inline-block;
   background: white;
   top: 20px;
   float: left;
@@ -69,13 +72,20 @@ p{
   overflow: visible;
 }
 
-ul {
+header{
+  position: relative;
+  display: block;
+}
+
+header ul {
     list-style-type: none;
-    margin-left: 10px;
+    margin-left: 120px;
     padding: 0;
     overflow: hidden;
-
-    float: right;
+    background-color: #D12C2C;
+    display: inline-block;
+    width: calc(100% - 120px);
+    text-align: right;
 }
 li {
     right: 10px;
@@ -85,14 +95,14 @@ li {
 }
 li a{
   display: block;
-  padding: 14px 16px;
+  padding: 15px 17px;
   text-align: center;
   text-decoration: none;
 }
 li a{
   text-decoration: none;
   position: relative;
-  color: #D12C2C;
+  color: white;
 }
 
 a:after {
@@ -101,7 +111,7 @@ a:after {
   bottom: 0;
   left: 0;
   width: 0%;
-  border-bottom: 2px solid #D12C2C;
+  border-bottom: 4px solid white;
   transition: 0.4s;
 }
 

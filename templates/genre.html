@@ -2,12 +2,19 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Main Form</title>
+    <title>Genre Form</title>
+    <link rel='stylesheet' href='/resources/common.css'>
   </head>
+
+
+  {% extends "base.html" %}
+
+{% block content %}
   <body>
     <h1>What Genre Are You Looking For?</h1>
     <form method="post" action='/rating'>
       <p><input type='text' name='genre'><input type='submit'></p>
     </form>
   </body>
+{% endblock %}
 </html>
