@@ -51,10 +51,15 @@ class MainHandler(webapp2.RequestHandler):
 
         #
 
-        template = env.get_template('home.html')
-        vars = {'CompanyName': 'louis.lewis movies'}
+        
         # self.response.out.write(template.render(vars))
         # self.response.write()
+
+
+class HomeHandler(webapp2.RequestHandler):
+    def get(self):
+        template = env.get_template('home.html')
+        self.response.out.write(template.render())
 
 class GenreHandler(webapp2.RequestHandler):
     def get(self):
@@ -96,8 +101,8 @@ class RecHandler(webapp2.RequestHandler):
         self.response.out.write(template.render({self.request.get('genre')}))
 
 app = webapp2.WSGIApplication([
-    ('/', MainHandler),
-    # ('/login', UserHandler),
+    ('/test', MainHandler),
+    ('/', HomeHandler),
     ('/genre', GenreHandler),
     ('/reviews', ReviewsHandler),
     ('/cast', CastHandler),
