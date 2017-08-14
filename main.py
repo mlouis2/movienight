@@ -19,12 +19,23 @@ import webapp2
 import os
 import unirest
 import time
+from google.appengine.api import urlfetch
+
 
 env = jinja2.Environment(loader=jinja2.FileSystemLoader('templates'))
 
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
+        # url = 'https://api.themoviedb.org/3/movie/10016?api_key=908b04b14312a6971d28a297db411fd7&language=en-US'
+        # try:
+        #     result = urlfetch.fetch(url)
+        #     if result.status_code == 200:
+        #         self.response.write(result)
+        #     else:
+        #         self.response.status_code = result.status_code
+        # except urlfetch.Error:
+        #     logging.exception('Caught exception fetching url')
 
         def callback(response):
             print(str(response.body))
@@ -86,7 +97,7 @@ class RecHandler(webapp2.RequestHandler):
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
-    ('/login', UserHandler),
+    # ('/login', UserHandler),
     ('/genre', GenreHandler),
     ('/reviews', ReviewsHandler),
     ('/cast', CastHandler),
