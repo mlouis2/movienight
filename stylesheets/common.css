@@ -8,7 +8,7 @@ header{
   margin-left: 10px;
   display: block;
   top: 30px;
-left: 120px;
+  left: 120px;
 }
 
 h1{
@@ -23,6 +23,33 @@ p{
   position: relative;
   top: 250px;
   text-align: center;
+
+}
+input{
+min-width: 80%;
+min-height: 50px;
+font-family: American Typewriter;
+font-size: 30px;
+text-align: center;
+}
+
+input[type=text]:focus{
+  outline: 2px solid #d12c2c;
+}
+
+input[type=submit]:focus{
+  outline: 2px solid white;
+}
+
+#submit{
+  border: none;
+  min-width: 40%;
+  height: 10%;
+  font-family: American Typewriter;
+  color: white;
+  font-size: 20px;
+  background-color: #d12c2c;
+  box-shadow: 0 0 4px #202020;
 }
 
 
@@ -83,8 +110,8 @@ header ul {
     margin-left: 120px;
     padding: 0;
     overflow: hidden;
-    background-color: #D12C2C;
-    
+    background-color: #D12C2C ;
+    box-shadow: 0 0 4px #202020;
     display: inline-block;
     width: calc(100% - 120px);
     text-align: right;
