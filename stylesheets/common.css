@@ -75,6 +75,7 @@ p{
 header{
   position: relative;
   display: block;
+
 }
 
 header ul {
@@ -83,6 +84,7 @@ header ul {
     padding: 0;
     overflow: hidden;
     background-color: #D12C2C;
+    
     display: inline-block;
     width: calc(100% - 120px);
     text-align: right;
