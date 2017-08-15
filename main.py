@@ -23,6 +23,7 @@ import urllib2
 import unirest
 import time
 from google.appengine.api import urlfetch
+from datetime import datetime, date
 
 
 env = jinja2.Environment(loader=jinja2.FileSystemLoader('templates'))
@@ -181,26 +182,54 @@ class RecHandler(webapp2.RequestHandler):
             'Music': 10402,
             'Mystery': 9648,
             'Romance': 10749,
-            'Science Fiction': 878,
-            'TV Movie': 10770,
+            'ScienceFiction': 878,
+            'TVMovie': 10770,
             'Thriller': 53,
             'War': 10752,
             'Western': 37
         }
 
+        # New is past year
+        # Recent is past ten years
+        # Old is older
+        recent = date(2007, 1, 1)
+        old = date(2006, 1, 1)
 
-        # if self.request.get('genre') not in genres.keys():
-        #     self.response.write( self.request.get('genre'))
-        # else:
-        #     self.response.write( 'out' )
-        #     self.response.write( self.request.get('genre'))
-
+        # If the movie is adult
         if self.request.get('adult') == 'Adult':
-            params = {'with_genres': genres[self.request.get('genre')], 'certification_country': 'US', 'certification': 'R','primary_release_year': year, 'api_key': '908b04b14312a6971d28a297db411fd7', 'limit': 10}
+            #And if the movies are new
+            if self.request.get('year') == 'new':
+                params = {'with_genres': genres[self.request.get('genre')], 'certification_country': 'US', 'certification': 'R', 'primary_release_year': 2017, 'api_key': '908b04b14312a6971d28a297db411fd7', 'limit': 10}
+            #And if the movies are recent
+            if self.request.get('year') == 'recent':
+                params = {'with_genres': genres[self.request.get('genre')], 'certification_country': 'US', 'certification': 'R', 'primary_release_year.gte': recent, 'api_key': '908b04b14312a6971d28a297db411fd7', 'limit': 10}
+            #And if the movies are old
+            if self.request.get('year') == 'old':
+                params = {'with_genres': genres[self.request.get('genre')], 'certification_country': 'US', 'certification': 'R', 'primary_release_year.lte': old, 'api_key': '908b04b14312a6971d28a297db411fd7', 'limit': 10}
+
+        #If the movie is for kids
         elif self.request.get('adult') == 'Kid':
-            params = {'with_genres': genres[self.request.get('genre')],'certification_country': 'US', 'certification': 'G','primary_release_year': year, 'api_key': '908b04b14312a6971d28a297db411fd7', 'limit': 10}
+            if self.request.get('year') == 'new':
+                params = {'with_genres': genres[self.request.get('genre')], 'certification_country': 'US', 'certification': 'G', 'primary_release_year': 2017, 'api_key': '908b04b14312a6971d28a297db411fd7', 'limit': 10}
+            #And if the movies are recent
+            if self.request.get('year') == 'recent':
+                params = {'with_genres': genres[self.request.get('genre')], 'certification_country': 'US', 'certification': 'G', 'primary_release_year.gte': recent, 'api_key': '908b04b14312a6971d28a297db411fd7', 'limit': 10}
+            #And if the movies are old
+            if self.request.get('year') == 'old':
+                params = {'with_genres': genres[self.request.get('genre')], 'certification_country': 'US', 'certification': 'G', 'primary_release_year.lte': old, 'api_key': '908b04b14312a6971d28a297db411fd7', 'limit': 10}
+
+        #If the movie is neither
         else:
-            params = {'with_genres': genres[self.request.get('genre')], 'primary_release_year': year, 'api_key': '908b04b14312a6971d28a297db411fd7', 'limit': 10}
+            if self.request.get('year') == 'new':
+                params = {'with_genres': genres[self.request.get('genre')], 'primary_release_year': 2017, 'api_key': '908b04b14312a6971d28a297db411fd7', 'limit': 10}
+            #And if the movies are recent
+            if self.request.get('year') == 'recent':
+                params = {'with_genres': genres[self.request.get('genre')], 'primary_release_date.gte': recent, 'api_key': '908b04b14312a6971d28a297db411fd7', 'limit': 10}
+            #And if the movies are old
+            if self.request.get('year') == 'old':
+                params = {'with_genres': genres[self.request.get('genre')], 'primary_release_date.lte': old, 'api_key': '908b04b14312a6971d28a297db411fd7', 'limit': 10}
+
+
         response = unirest.get(base_url, params = params, callback = callback)
         time.sleep(1)
 
