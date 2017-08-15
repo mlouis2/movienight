@@ -21,19 +21,19 @@ h1{
 }
 p{
   position: relative;
-  top: 250px;
+  top: 200px;
   text-align: center;
 
 }
-input{
+#text{
 min-width: 80%;
 min-height: 50px;
 font-family: American Typewriter;
-font-size: 30px;
+font-size: 20px;
 text-align: center;
 }
 
-input[type=text]:focus{
+#text:focus{
   outline: 2px solid #d12c2c;
 }
 
