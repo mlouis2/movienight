@@ -177,7 +177,7 @@ class RecHandler(webapp2.RequestHandler):
         response = unirest.get(base_url, params = params, callback = callback)
         time.sleep(1)
 
-        self.response.out.write(self.request.get('genre'))
+        genre_rec = self.response.out.write(self.request.get('genre'))
         self.response.out.write(template.render())
 
 app = webapp2.WSGIApplication([

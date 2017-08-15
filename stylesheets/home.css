@@ -11,6 +11,16 @@ body{
 left: 120px;
 }
 
+#popcorn {
+  display: block;
+  margin: auto;
+  clear: both;
+  text-align: center;
+  position: relative;
+  min-width: 100%;
+  max-width: 100%;
+}
+
 
 
 
