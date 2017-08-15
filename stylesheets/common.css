@@ -29,15 +29,15 @@ p{
 min-width: 80%;
 min-height: 50px;
 font-family: American Typewriter;
-font-size: 20px;
+font-size: 30px;
 text-align: center;
 }
 
-#text:focus{
+select[type=text]:focus{
   outline: 2px solid #d12c2c;
 }
 
-input[type=submit]:focus{
+select[type=submit]:focus{
   outline: 2px solid white;
 }
 
