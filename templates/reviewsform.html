@@ -10,10 +10,11 @@
 
 {% block content %}
   <body>
-  <h1>Minimum Number of Stars?</h1>
-    <form method="post" action="/cast">
-      <p><input type='text' name='reviews'></p>
+  <h1>Rating Out of Ten?</h1>
+    <form method="post" action="/companies">
+      <p><input id='text' type='text' name='reviews'></p>
       <p><input id='submit' type='submit'></p>
+      <input type="hidden" name="genre" value={{genre}}>
     </form>
   </body>
 {% endblock %}

@@ -9,15 +9,13 @@
   {% extends "base.html" %}
 {% block content %}
   <body>
-    <h1>What Cast/Actors do You Like?</h1>
-    <form method="post" action='/director'>
+    <h1>Cast/Actors/Crew?</h1>
+    <form method="post" action='/recommendations'>
       <p>
-        <div class="input-field">
-          <input type="text" id="answer" required />
-          <label for="cast">Cast:</label>
-      </div>
+          <input type="text" id="text" name='cast'>
     </p>
       <p><input id='submit' type='submit'></p>
+      <input type="hidden" name="genre" value={{genre}}>
     </form>
   </body>
 {% endblock %}

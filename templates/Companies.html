@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Style Form</title>
+    <title>Other Movies Form</title>
     <link rel='stylesheet' href='/resources/common.css'>
   </head>
 
@@ -10,11 +10,11 @@
 
 {% block content %}
   <body>
-    <h1>What Style?</h1>
-    <form method="post" action='/recommendations'>
-      <p><input type='text' name='style'></p>
+    <h1>Production Companies?</h1>
+    <form method="post" action='/cast'>
+      <p><input id='text' type='text' name='movie'></p>
       <p><input id='submit' type='submit'></p>
-
+      <input type="hidden" name="genre" value={{genre}}>
     </form>
   </body>
 {% endblock %}

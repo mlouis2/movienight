@@ -10,11 +10,11 @@
 
 {% block content %}
   <body>
-    <h1>What Rating?</h1>
-    <form method="post" action='/reviews'>
-      <p><input type='text' name='rating'></p>
+    <h1>Adult Movie?</h1>
+    <form method="post" action='/year'>
+      <p><input id='text' type='text' name='rating'></p>
       <p><input id='submit' type='submit'></p>
-      <input type="hidden" name="genre">
+      <input type="hidden" name="genre" value={{genre}}>
     </form>
   </body>
 {% endblock %}
