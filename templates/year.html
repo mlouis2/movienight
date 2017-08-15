@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <title>Director Form</title>
     <link rel='stylesheet' href='/resources/common.css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="/javascript/common.js"></script>
   </head>
 
   {% extends "base.html" %}
@@ -24,6 +26,15 @@
       <input type="hidden" name="genre" value={{genre}}>
       <input type="hidden" name="adult" value={{adult}}>
     </form>
+    <div id='Gallery'>
+      <img id='one' class='photo' src='/images/wonderfullife.jpg' height='250'>
+      <img id='two' class='photo' src='/images/oldstarwars.jpg' height='250'>
+      <img id='three' class='photo' src='/images/maleficient.jpg' height='250'>
+      <img id='four' class='photo' src='/images/monstersinc.jpg' height='250'>
+      <img id='five' class='photo' src='/images/jaws.jpg' height='250'>
+      <img id='six' class='photo' src='/images/princessfrog.jpg' height='250'>
+      <img id='seven' class='photo' src='/images/jurassicpark.jpg' height='250'>
+    </div>
   </body>
 {% endblock %}
 

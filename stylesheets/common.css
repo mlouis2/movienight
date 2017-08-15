@@ -64,7 +64,11 @@ input[type=submit]:focus{
   background-color: #d12c2c;
   box-shadow: 0 0 4px #202020;
 }
-
+#Gallery{
+  position: relative;
+  top: 100px;
+  text-align: center;
+}
 
 
 

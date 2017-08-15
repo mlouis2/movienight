@@ -5,6 +5,8 @@
     <title>Rating Form</title>
     <link rel='stylesheet' href='/resources/common.css'>
     <link rel='stylesheet' href='/resources/rating.css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="/javascript/common.js"></script>
   </head>
 
   {% extends "base.html" %}
@@ -22,6 +24,16 @@
       <p><input id='submit' type='submit'></p>
       <input type="hidden" name="genre" value={{genre}}>
     </form>
+
+    <div id='Gallery'>
+      <img id='one' class='photo' src='/images/brave.jpg' height='250'>
+      <img id='two' class='photo' src='/images/casablanca.jpg' height='250'>
+      <img id='three' class='photo' src='/images/cinderella.jpg' height='250'>
+      <img id='four' class='photo' src='/images/forceawakens.jpg' height='250'>
+      <img id='five' class='photo' src='/images/lalaland.jpg' height='250'>
+      <img id='six' class='photo' src='/images/soundofmusic.jpg' height='250'>
+      <img id='seven' class='photo' src='/images/walle.jpg' height='250'>
+    </div>
   </body>
 {% endblock %}
 

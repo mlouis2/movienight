@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <title>Other Movies Form</title>
     <link rel='stylesheet' href='/resources/common.css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="/javascript/common.js"></script>
   </head>
 
   {% extends "base.html" %}
@@ -28,6 +30,16 @@
         <input type="hidden" name="adult" value={{adult}}>
         <input type="hidden" name="year" value={{year}}>
     </form>
+
+    <div id='Gallery'>
+      <img id='one' class='photo' src='/images/inception.jpg' height='250'>
+      <img id='two' class='photo' src='/images/pirates.jpg' height='250'>
+      <img id='three' class='photo' src='/images/birdman.jpg' height='250'>
+      <img id='four' class='photo' src='/images/homealone.jpg' height='250'>
+      <img id='five' class='photo' src='/images/lilo.jpg' height='250'>
+      <img id='six' class='photo' src='/images/lesmis.jpg' height='250'>
+      <img id='seven' class='photo' src='/images/godfather.jpg' height='250'>
+    </div>
   </body>
 {% endblock %}
 
