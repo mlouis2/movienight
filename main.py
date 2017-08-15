@@ -17,6 +17,9 @@
 import jinja2
 import webapp2
 import os
+import json
+import urllib
+import urllib2
 import unirest
 import time
 from google.appengine.api import urlfetch
@@ -51,7 +54,7 @@ class MainHandler(webapp2.RequestHandler):
 
         #
 
-        
+
         # self.response.out.write(template.render(vars))
         # self.response.write()
 
@@ -61,6 +64,17 @@ class HomeHandler(webapp2.RequestHandler):
         template = env.get_template('home.html')
         self.response.out.write(template.render())
 
+class UserHandler (webapp2.RequestHandler):
+    def get(self):
+        user = users.get_current_user()
+        if user:
+            greeting = ('Welcome, %s! (<a href="%s">sign out</a>)' %
+                (user.nickname(), users.create_logout_url('/')))
+        else:
+            greeting = ('<a href="%s">Sign in or register</a>.' %
+                users.create_login_url('/'))
+        self.response.write('<html><body>%s</body></html>' % greeting)
+
 class GenreHandler(webapp2.RequestHandler):
     def get(self):
         template = env.get_template('genre.html')
@@ -68,8 +82,9 @@ class GenreHandler(webapp2.RequestHandler):
 
 class ReviewsHandler(webapp2.RequestHandler):
     def post(self):
-        template = env.get_template('reviewsform.html')
+        template = env.get_template('rating.html')
         self.response.out.write(template.render())
+
 
 class CastHandler(webapp2.RequestHandler):
     def post(self):
@@ -82,8 +97,18 @@ class OtherMoviesHandler(webapp2.RequestHandler):
         self.response.out.write(template.render())
 class RatingHandler(webapp2.RequestHandler):
     def post(self):
-        template = env.get_template('rating.html')
-        self.response.out.write(template.render())
+        template = env.get_template('reviewsform.html')
+        def callback(response):
+            print(str(response.body))
+            self.response.write(response.body)
+
+        base_url = 'https://api.themoviedb.org/3/discover/movie'
+        params = {'with_genres': self.request.get('genre'), 'api_key': '908b04b14312a6971d28a297db411fd7', 'limit': 10}
+        response = unirest.get(base_url, params = params, callback = callback)
+        time.sleep(1)
+
+        self.response.out.write(self.request.get('genre'))
+        # self.response.out.write(template.render())
 
 class DirectorHandler(webapp2.RequestHandler):
     def post(self):
@@ -110,5 +135,6 @@ app = webapp2.WSGIApplication([
     ('/rating', RatingHandler),
     ('/director', DirectorHandler),
     ('/style', StyleHandler),
-    ('/recommendations', RecHandler)
+    ('/recommendations', RecHandler),
+    ('/signup', UserHandler)
 ], debug=True)

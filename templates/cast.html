@@ -11,7 +11,12 @@
   <body>
     <h1>What Cast/Actors do You Like?</h1>
     <form method="post" action='/director'>
-      <p><input type='text' name='cast'></p>
+      <p>
+        <div class="input-field">
+          <input type="text" id="answer" required />
+          <label for="cast">Cast:</label>
+      </div>
+    </p>
       <p><input id='submit' type='submit'></p>
     </form>
   </body>
