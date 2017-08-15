@@ -12,9 +12,10 @@
   <body>
     <h1>Old Movie or New Movie?</h1>
     <form method="post" action='/reviews'>
-      <p><input id='text' type='text' name='director'></p>
+      <p><input id='text' type='text' name='year'></p>
       <p><input id='submit' type='submit'></p>
       <input type="hidden" name="genre" value={{genre}}>
+      <input type="hidden" name="adult" value={{adult}}>
     </form>
   </body>
 {% endblock %}

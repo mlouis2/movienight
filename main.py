@@ -91,20 +91,21 @@ class AdultHandler(webapp2.RequestHandler):
 
 class YearHandler(webapp2.RequestHandler):
     def post(self):
-
         template = env.get_template('year.html')
         genre = self.request.get('genre')
+        adult = self.request.get('adult')
         vars = {
-            'genre': genre
-        }
+                'genre': genre, 'adult':adult
+            }
         self.response.out.write(template.render(vars))
 
 class ReviewsHandler(webapp2.RequestHandler):
     def post(self):
         template = env.get_template('reviewsform.html')
         genre = self.request.get('genre')
+        adult = self.request.get('adult')
         vars = {
-            'genre': genre
+            'genre': genre, 'adult':adult
         }
         self.response.out.write(template.render(vars))
 
@@ -112,8 +113,9 @@ class CompaniesHandler(webapp2.RequestHandler):
     def post(self):
         template = env.get_template('companies.html')
         genre = self.request.get('genre')
+        adult = self.request.get('adult')
         vars = {
-            'genre': genre
+            'genre': genre, 'adult':adult
         }
         self.response.out.write(template.render(vars))
 
@@ -121,8 +123,9 @@ class CastHandler(webapp2.RequestHandler):
     def post(self):
         template = env.get_template('cast.html')
         genre = self.request.get('genre')
+        adult = self.request.get('adult')
         vars = {
-            'genre': genre
+            'genre': genre, 'adult':adult
         }
         self.response.out.write(template.render(vars))
 
@@ -133,6 +136,7 @@ class RecHandler(webapp2.RequestHandler):
     def post(self):
         template = env.get_template('recommendations.html')
         genre = self.request.get('genre')
+        adult = self.request.get('adult')
         def callback(response):
             print(str(response.body))
             movies = []
@@ -142,6 +146,7 @@ class RecHandler(webapp2.RequestHandler):
                #self.response.write(movie['title'])
             vars = {
                 'genre': genre,
+                'adult': adult,
                 'movies': movies
             }
             self.response.out.write(template.render(vars))
@@ -172,18 +177,27 @@ class RecHandler(webapp2.RequestHandler):
             'Western': 37
         }
 
+
+
         # if self.request.get('genre') not in genres.keys():
         #     self.response.write( self.request.get('genre'))
         # else:
         #     self.response.write( 'out' )
         #     self.response.write( self.request.get('genre'))
 
-        params = {'with_genres': genres[self.request.get('genre')], 'api_key': '908b04b14312a6971d28a297db411fd7', 'limit': 10}
+        if self.request.get('adult') == 'Adult':
+            params = {'with_genres': genres[self.request.get('genre')], 'certification_country': 'US', 'certification': 'R', 'api_key': '908b04b14312a6971d28a297db411fd7', 'limit': 10}
+        elif self.request.get('adult') == 'Kid':
+            params = {'with_genres': genres[self.request.get('genre')],'certification_country': 'US', 'certification': 'G', 'api_key': '908b04b14312a6971d28a297db411fd7', 'limit': 10}
+        else:
+            params = {'with_genres': genres[self.request.get('genre')], 'api_key': '908b04b14312a6971d28a297db411fd7', 'limit': 10}
         response = unirest.get(base_url, params = params, callback = callback)
         time.sleep(1)
 
         # genre_rec = self.response.out.write(self.request.get('genre'))
         # self.response.out.write(template.render())
+
+
 
 app = webapp2.WSGIApplication([
     ('/test', MainHandler),

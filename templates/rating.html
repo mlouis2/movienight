@@ -10,9 +10,9 @@
 
 {% block content %}
   <body>
-    <h1>Adult Movie?</h1>
+    <h1>Do You Want to Watch an Adult Movie, a Kid's Movie, or All?</h1>
     <form method="post" action='/year'>
-      <p><input id='text' type='text' name='rating'></p>
+      <p><input id='text' type='text' name='adult'></p>
       <p><input id='submit' type='submit'></p>
       <input type="hidden" name="genre" value={{genre}}>
     </form>
