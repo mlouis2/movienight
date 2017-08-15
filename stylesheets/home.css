@@ -14,11 +14,11 @@ left: 120px;
 #popcorn {
   display: block;
   margin: auto;
-  clear: both;
+  top: 30px;
   text-align: center;
   position: relative;
-  min-width: 100%;
-  max-width: 100%;
+  min-width: 90%;
+  max-width: 90%;
 }
 
 
