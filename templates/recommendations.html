@@ -13,8 +13,14 @@
   <body>
     Your recommendations are:
     {% for m in movies %}
-          {{m}}, 
+          {{ m }},
     {% endfor %}
+
+    {% for url in posterurls %}
+          <p>
+          <img src="{{ url }}"></img>
+          </p>
+     {% endfor %}
   </body>
 {% endblock %}
 

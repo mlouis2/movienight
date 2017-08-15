@@ -129,18 +129,27 @@ class RecHandler(webapp2.RequestHandler):
         adult = self.request.get('adult')
         year = self.request.get('year')
         company = self.request.get('company')
+        cast = self.request.get('cast')
         def callback(response):
             print(str(response.body))
             movies = []
+            movieposters = []
+            posterurls = []
             for movie in response.body['results']:
                 movies.append(movie['title'])
+                movieposters.append(movie['poster_path'])
+                posterurls.append("https://image.tmdb.org/t/p/w300/" + movie['poster_path'])
+
 
             vars = {
                 'genre': genre,
                 'adult': adult,
                 'year': year,
                 'movies': movies,
-                'company': company
+                'movieposters': movieposters,
+                'posterurls': posterurls,
+                'company': company,
+                'cast': cast
             }
             self.response.out.write(template.render(vars))
 
@@ -197,8 +206,11 @@ class RecHandler(webapp2.RequestHandler):
         elif self.request.get('year') == 'old':
             params['primary_release_date.lte'] = old
 
-        if companies[self.request.get('company')] != 'Any':
+        if company != 'Any' and company != '  ':
             params['with_companies'] = companies[self.request.get('company')]
+
+        # if cast
+        #     params['with_people'] = self.request.get('cast').id
 
         response = unirest.get(base_url, params = params, callback = callback)
         time.sleep(1)
