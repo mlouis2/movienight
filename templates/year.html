@@ -10,11 +10,11 @@
 
 {% block content %}
   <body>
-    <h1>Release Date?</h1>
-    <form id='Ratings' method="post" action='/reviews'>
-      <p><select form_id='Ratings' id='Box' class='year' name='year'>
+    <h1>How Recent?</h1>
+    <form id='Year' method="post" action='/companies'>
+      <p><select form_id='Year' id='Box' class='year' name='year'>
           <option id='text' value='  '>  </option>
-
+          <option id='text' value='any'>Any</option>
           <option id='text' value='new'>New</option>
           <option id='text' value='recent'>Recent</option>
           <option id='text' value='old'>Old</option>

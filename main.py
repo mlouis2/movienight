@@ -25,21 +25,10 @@ import time
 from google.appengine.api import urlfetch
 from datetime import datetime, date
 
-
 env = jinja2.Environment(loader=jinja2.FileSystemLoader('templates'))
-
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        # url = 'https://api.themoviedb.org/3/movie/10016?api_key=908b04b14312a6971d28a297db411fd7&language=en-US'
-        # try:
-        #     result = urlfetch.fetch(url)
-        #     if result.status_code == 200:
-        #         self.response.write(result)
-        #     else:
-        #         self.response.status_code = result.status_code
-        # except urlfetch.Error:
-        #     logging.exception('Caught exception fetching url')
 
         def callback(response):
             print(str(response.body))
@@ -50,15 +39,6 @@ class MainHandler(webapp2.RequestHandler):
 
         response = unirest.get(url, params = params, callback = callback)
         time.sleep(1)
-        # self.response.write(m)
-
-
-        #
-
-
-        # self.response.out.write(template.render(vars))
-        # self.response.write()
-
 
 class HomeHandler(webapp2.RequestHandler):
     def get(self):
@@ -96,7 +76,8 @@ class YearHandler(webapp2.RequestHandler):
         genre = self.request.get('genre')
         adult = self.request.get('adult')
         vars = {
-                'genre': genre, 'adult':adult
+                'genre': genre,
+                'adult':adult
             }
         self.response.out.write(template.render(vars))
 
@@ -132,15 +113,14 @@ class CastHandler(webapp2.RequestHandler):
         genre = self.request.get('genre')
         adult = self.request.get('adult')
         year = self.request.get('year')
+        company = self.request.get('company')
         vars = {
             'genre': genre,
             'adult':adult,
-            'year': year
+            'year': year,
+            'company': company
             }
         self.response.out.write(template.render(vars))
-
-
-
 
 class RecHandler(webapp2.RequestHandler):
     def post(self):
@@ -148,21 +128,21 @@ class RecHandler(webapp2.RequestHandler):
         genre = self.request.get('genre')
         adult = self.request.get('adult')
         year = self.request.get('year')
+        company = self.request.get('company')
         def callback(response):
             print(str(response.body))
             movies = []
             for movie in response.body['results']:
-
                 movies.append(movie['title'])
-               #self.response.write(movie['title'])
+
             vars = {
                 'genre': genre,
                 'adult': adult,
                 'year': year,
-                'movies': movies
+                'movies': movies,
+                'company': company
             }
             self.response.out.write(template.render(vars))
-            #self.response.write(response.body['results'][0]['title'])
 
         base_url = 'https://api.themoviedb.org/3/discover/movie'
 
@@ -189,46 +169,36 @@ class RecHandler(webapp2.RequestHandler):
             'Western': 37
         }
 
+        companies = {
+            'Disney': 2,
+            'Paramount': 4,
+            'DreamWorks': 7,
+            'Universal': 13,
+            'Fox': 25,
+        }
+
         # New is past year
         # Recent is past ten years
         # Old is older
         recent = date(2007, 1, 1)
         old = date(2006, 1, 1)
 
-        # If the movie is adult
+        params = {'api_key': '908b04b14312a6971d28a297db411fd7', 'certification_country': 'US', 'with_genres': genres[self.request.get('genre')]}
+
         if self.request.get('adult') == 'Adult':
-            #And if the movies are new
-            if self.request.get('year') == 'new':
-                params = {'with_genres': genres[self.request.get('genre')], 'certification_country': 'US', 'certification': 'R', 'primary_release_year': 2017, 'api_key': '908b04b14312a6971d28a297db411fd7', 'limit': 10}
-            #And if the movies are recent
-            if self.request.get('year') == 'recent':
-                params = {'with_genres': genres[self.request.get('genre')], 'certification_country': 'US', 'certification': 'R', 'primary_release_year.gte': recent, 'api_key': '908b04b14312a6971d28a297db411fd7', 'limit': 10}
-            #And if the movies are old
-            if self.request.get('year') == 'old':
-                params = {'with_genres': genres[self.request.get('genre')], 'certification_country': 'US', 'certification': 'R', 'primary_release_year.lte': old, 'api_key': '908b04b14312a6971d28a297db411fd7', 'limit': 10}
-
-        #If the movie is for kids
+            params['certification'] = 'R'
         elif self.request.get('adult') == 'Kid':
-            if self.request.get('year') == 'new':
-                params = {'with_genres': genres[self.request.get('genre')], 'certification_country': 'US', 'certification': 'G', 'primary_release_year': 2017, 'api_key': '908b04b14312a6971d28a297db411fd7', 'limit': 10}
-            #And if the movies are recent
-            if self.request.get('year') == 'recent':
-                params = {'with_genres': genres[self.request.get('genre')], 'certification_country': 'US', 'certification': 'G', 'primary_release_year.gte': recent, 'api_key': '908b04b14312a6971d28a297db411fd7', 'limit': 10}
-            #And if the movies are old
-            if self.request.get('year') == 'old':
-                params = {'with_genres': genres[self.request.get('genre')], 'certification_country': 'US', 'certification': 'G', 'primary_release_year.lte': old, 'api_key': '908b04b14312a6971d28a297db411fd7', 'limit': 10}
+            params['certification'] = 'G'
 
-        #If the movie is neither
-        else:
-            if self.request.get('year') == 'new':
-                params = {'with_genres': genres[self.request.get('genre')], 'primary_release_year': 2017, 'api_key': '908b04b14312a6971d28a297db411fd7', 'limit': 10}
-            #And if the movies are recent
-            if self.request.get('year') == 'recent':
-                params = {'with_genres': genres[self.request.get('genre')], 'primary_release_date.gte': recent, 'api_key': '908b04b14312a6971d28a297db411fd7', 'limit': 10}
-            #And if the movies are old
-            if self.request.get('year') == 'old':
-                params = {'with_genres': genres[self.request.get('genre')], 'primary_release_date.lte': old, 'api_key': '908b04b14312a6971d28a297db411fd7', 'limit': 10}
+        if self.request.get('year') == 'new':
+            params['primary_release_year'] = 2017
+        elif self.request.get('year') == 'recent':
+            params['primary_release_date.gte'] = recent
+        elif self.request.get('year') == 'old':
+            params['primary_release_date.lte'] = old
 
+        if companies[self.request.get('company')] != 'Any':
+            params['with_companies'] = companies[self.request.get('company')]
 
         response = unirest.get(base_url, params = params, callback = callback)
         time.sleep(1)
@@ -244,7 +214,7 @@ app = webapp2.WSGIApplication([
     ('/genre', GenreHandler),
     ('/adult', AdultHandler),
     ('/year', YearHandler),
-    ('/reviews', ReviewsHandler),
+    # ('/reviews', ReviewsHandler),
     ('/companies', CompaniesHandler),
     ('/cast', CastHandler),
     ('/recommendations', RecHandler),

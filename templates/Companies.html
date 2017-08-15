@@ -10,13 +10,23 @@
 
 {% block content %}
   <body>
-    <h1>Production Companies?</h1>
-    <form method="post" action='/cast'>
-      <p><input id='text' type='text' name='movie'></p>
-      <p><input id='submit' type='submit'></p>
-      <input type="hidden" name="genre" value={{genre}}>
-      <input type="hidden" name="adult" value={{adult}}>
-      <input type="hidden" name="year" value={{year}}>
+    <h1>Pick a Production Company!</h1>
+    <form id='Companies' method="post" action='/cast'>
+      <!-- <p><input id='text'type='text' name='genre'></p> -->
+      <p><select form_id='Companies' id='Box' class='company' name='company'>
+          <option id='text' value='  '>  </option>
+          <option id='text' value='Any'>Any</option>
+          <option id='text' value='Disney'>Disney</option>
+          <option id='text' value='Paramount'>Paramount Pictures</option>
+          <option id='text' value='DreamWorks'>DreamWorks</option>
+          <optopn id='text' value='Universal'>Universal Pictures</option>
+          <option id='text' value='Fox'>20th Century Fox</option>
+
+        </p>
+        <p><input id='submit' type='submit'></p>
+        <input type="hidden" name="genre" value={{genre}}>
+        <input type="hidden" name="adult" value={{adult}}>
+        <input type="hidden" name="year" value={{year}}>
     </form>
   </body>
 {% endblock %}
