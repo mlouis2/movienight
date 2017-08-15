@@ -104,7 +104,9 @@ class RatingHandler(webapp2.RequestHandler):
         template = env.get_template('reviewsform.html')
         def callback(response):
             print(str(response.body))
-            # self.response.write(response.body)
+            for movie in response.body['results']:
+               self.response.write(movie['title'])
+            #self.response.write(response.body['results'][0]['title'])
 
         base_url = 'https://api.themoviedb.org/3/discover/movie'
 
