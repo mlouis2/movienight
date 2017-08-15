@@ -3,10 +3,11 @@ imageIndex = 0
 currentImage = $('#one')
 fadeDuration = 3000
 
-
+$(document).ready(function(){
+	$('.photo').hide();
+})
 
 $(window).load(function() {
-		$('.photo').hide();
      $(".photo").each(function(i) {
           $(this).delay(400*i).fadeIn(1000);
      });
