@@ -133,13 +133,18 @@ class RecHandler(webapp2.RequestHandler):
     def post(self):
         template = env.get_template('recommendations.html')
         genre = self.request.get('genre')
-        vars = {
-            'genre': genre
-        }
         def callback(response):
             print(str(response.body))
+            movies = []
             for movie in response.body['results']:
-               self.response.write(movie['title'])
+
+                movies.append(movie['title'])
+               #self.response.write(movie['title'])
+            vars = {
+                'genre': genre,
+                'movies': movies
+            }
+            self.response.out.write(template.render(vars))
             #self.response.write(response.body['results'][0]['title'])
 
         base_url = 'https://api.themoviedb.org/3/discover/movie'
@@ -177,8 +182,8 @@ class RecHandler(webapp2.RequestHandler):
         response = unirest.get(base_url, params = params, callback = callback)
         time.sleep(1)
 
-        genre_rec = self.response.out.write(self.request.get('genre'))
-        self.response.out.write(template.render())
+        # genre_rec = self.response.out.write(self.request.get('genre'))
+        # self.response.out.write(template.render())
 
 app = webapp2.WSGIApplication([
     ('/test', MainHandler),

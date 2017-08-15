@@ -10,7 +10,11 @@
 
 {% block content %}
   <body>
-    Your recommendations are: {{genre_rec}} 
+    <!-- Your recommendations are: {{genre_rec}} -->
+    Your recommendations are:
+    {% for m in movies %}
+          {{m}}
+    {% endfor %}
   </body>
 {% endblock %}
 
