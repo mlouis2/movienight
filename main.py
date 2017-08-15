@@ -77,6 +77,9 @@ class UserHandler (webapp2.RequestHandler):
 
 class GenreHandler(webapp2.RequestHandler):
     def get(self):
+
+
+
         template = env.get_template('genre.html')
         self.response.out.write(template.render())
 
@@ -96,6 +99,7 @@ class OtherMoviesHandler(webapp2.RequestHandler):
         template = env.get_template('othermovies.html')
         self.response.out.write(template.render())
 class RatingHandler(webapp2.RequestHandler):
+
     def post(self):
         template = env.get_template('reviewsform.html')
         def callback(response):
@@ -103,7 +107,33 @@ class RatingHandler(webapp2.RequestHandler):
             self.response.write(response.body)
 
         base_url = 'https://api.themoviedb.org/3/discover/movie'
-        params = {'with_genres': self.request.get('genre'), 'api_key': '908b04b14312a6971d28a297db411fd7', 'limit': 10}
+
+        #Dictionary of genres
+        genres = {
+            'Action': 28,
+            'Adventure': 12,
+            'Animation': 16,
+            'Comedy': 35,
+            'Crime': 80,
+            'Documentary': 99,
+            'Drama': 18,
+            'Family': 10751,
+            'Fantasy': 14,
+            'History': 36,
+            'Horror': 27,
+            'Music': 10402,
+            'Mystery': 9648,
+            'Romance': 10749,
+            'Science Fiction': 878,
+            'TV Movie': 10770,
+            'Thriller': 53,
+            'War': 10752,
+            'Western': 37
+        }
+
+        #print groceries_by_price['Eggs']
+
+        params = {'with_genres': genres[self.request.get('genre')], 'api_key': '908b04b14312a6971d28a297db411fd7', 'limit': 10}
         response = unirest.get(base_url, params = params, callback = callback)
         time.sleep(1)
 
