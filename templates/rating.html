@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <title>Rating Form</title>
     <link rel='stylesheet' href='/resources/common.css'>
+    <link rel='stylesheet' href='/resources/rating.css'>
   </head>
 
   {% extends "base.html" %}
 
 {% block content %}
   <body>
-    <h1>Do You Want to Watch an Adult Movie, a Kid's Movie, or All?</h1>
+    <h1>What Rating are You Looking For?</h1>
     <form id='Ratings' method="post" action='/year'>
       <p><select form_id='Ratings' id='Box' class='adult' name='adult'>
           <option id='text' value='  '>  </option>

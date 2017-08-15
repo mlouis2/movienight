@@ -14,14 +14,14 @@ header{
 h1{
   position: relative;
   font-family: American Typewriter;
-  font-weight: lighter;
+  font-weight: normal;
   font-size: 60px;
-  top: 200px;
+  top: 100px;
   text-align: center;
 }
 p{
   position: relative;
-  top: 200px;
+  top: 100px;
   text-align: center;
 
 }
