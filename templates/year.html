@@ -10,9 +10,22 @@
 
 {% block content %}
   <body>
-    <h1>Old Movie or New Movie?</h1>
-    <form method="post" action='/reviews'>
-      <p><input id='text' type='text' name='year'></p>
+    <h1>Release Date?</h1>
+    <form id='Ratings' method="post" action='/reviews'>
+      <p><select form_id='Ratings' id='Box' class='year' name='year'>
+          <option id='text' value='  '>  </option>
+          <option id='text' value='2017'>2017</option>
+          <option id='text' value='2016'>2016</option>
+          <option id='text' value='2015'>2015</option>
+          <option id='text' value='2015'>2014</option>
+          <option id='text' value='2015'>2013</option>
+          <option id='text' value='2015'>2012</option>
+          <option id='text' value='2015'>2011</option>
+          <option id='text' value='2015'>2010</option>
+          <option id='text' value='2015'>2009</option>
+
+
+        </p>
       <p><input id='submit' type='submit'></p>
       <input type="hidden" name="genre" value={{genre}}>
       <input type="hidden" name="adult" value={{adult}}>

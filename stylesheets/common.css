@@ -29,15 +29,26 @@ p{
 min-width: 80%;
 min-height: 50px;
 font-family: American Typewriter;
-font-size: 30px;
+font-size: 20px;
 text-align: center;
 }
 
-select[type=text]:focus{
+#Box{
+  min-width: 80%;
+  min-height: 50px;
+  font-family: American Typewriter;
+  font-size: 20px;
+  text-align: center;
+  padding: 20px;
+}
+#Box:focus{
+    outline: 2px solid #d12c2c;
+}
+input[type=text]:focus{
   outline: 2px solid #d12c2c;
 }
 
-select[type=submit]:focus{
+input[type=submit]:focus{
   outline: 2px solid white;
 }
 
@@ -48,6 +59,8 @@ select[type=submit]:focus{
   font-family: American Typewriter;
   color: white;
   font-size: 20px;
+  margin: 40px;
+  padding: 10px;
   background-color: #d12c2c;
   box-shadow: 0 0 4px #202020;
 }

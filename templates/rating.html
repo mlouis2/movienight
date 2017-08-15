@@ -11,8 +11,13 @@
 {% block content %}
   <body>
     <h1>Do You Want to Watch an Adult Movie, a Kid's Movie, or All?</h1>
-    <form method="post" action='/year'>
-      <p><input id='text' type='text' name='adult'></p>
+    <form id='Ratings' method="post" action='/year'>
+      <p><select form_id='Ratings' id='Box' class='adult' name='adult'>
+          <option id='text' value='  '>  </option>
+          <option id='text' value='Adult'>Adult</option>
+          <option id='text' value='Kid'>Kid</option>
+          <option id='text' value='Any'>Any</option>
+        </p>
       <p><input id='submit' type='submit'></p>
       <input type="hidden" name="genre" value={{genre}}>
     </form>

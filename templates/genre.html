@@ -12,9 +12,31 @@
 {% block content %}
   <body>
     <h1>What Genre Are You Looking For?</h1>
-    <form method="post" action='/adult'>
-      <p><input id='text'type='text' name='genre'></p>
-      <p><input id='submit' type='submit'></p>
+    <form id='Genres' method="post" action='/adult'>
+      <!-- <p><input id='text'type='text' name='genre'></p> -->
+      <p><select form_id='Genres' id='Box' class='genre' name='genre'>
+          <option id='text' value='  '>  </option>
+          <option id='text' value='Action'>Action</option>
+          <option id='text' value='Adventure'>Adventure</option>
+          <option id='text' value='Animation'>Animation</option>
+          <optopn id='text' value='Comedy'>Comedy</option>
+          <option id='text' value='Crime'>Crime</option>
+          <option id='text' value='Documentary'>Documentary</option>
+          <option id='text' value='Drama'>Drama</option>
+          <option id='text' value='Family'>Family</option>
+          <option id='text' value='Fantasy'>Fantasy</option>
+          <option id='text' value='History'>History</option>
+          <option id='text' value='Horror'>Horror</option>
+          <option id='text' value='Mystery'>Mystery</option>
+          <option id='text' value='Romance'>Romance</option>
+          <option id='text' value='Science Fiction'>Science Fiction</option>
+          <option id='text' value='TV Movie'>TV Movie</option>
+          <option id='text' value='Thriller'>Thriller</option>
+          <option id='text' value='War'>War</option>
+          <option id='text' value='Western'>Western</option>
+
+        </p>
+        <p><input id='submit' type='submit'></p>
     </form>
   </body>
 {% endblock %}
