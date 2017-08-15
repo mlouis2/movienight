@@ -1,11 +1,19 @@
+body{
+  background:white;
+
+}
+
+
 h1{
-    background: url('/images/et.jpg');
-    position:relative;
-    display: inline-block;
-    margin:0 25px;
-    color: white;
-    font-weight: normal;
-    text-shadow: 1px 1px black;
-    padding: 60px;
-    height:100%;
+  font-family: Avenir Next;
+  margin: 0;
+}
+
+#comedy{
+  padding: 10px;
+}
+#gallery{
+  position: relative;
+  top: 100px;
+  text-align: center;
 }
