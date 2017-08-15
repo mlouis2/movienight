@@ -157,6 +157,7 @@ class RecHandler(webapp2.RequestHandler):
 
         #Dictionary of genres
         genres = {
+
             'Action': 28,
             'Adventure': 12,
             'Animation': 16,
@@ -192,7 +193,10 @@ class RecHandler(webapp2.RequestHandler):
         recent = date(2007, 1, 1)
         old = date(2006, 1, 1)
 
-        params = {'api_key': '908b04b14312a6971d28a297db411fd7', 'certification_country': 'US', 'with_genres': genres[self.request.get('genre')]}
+        params = {'api_key': '908b04b14312a6971d28a297db411fd7', 'certification_country': 'US'}
+
+        if self.request.get('genre') != '  ' and self.request.get('genre') != 'Any':
+            params['with_genres'] = genres[self.request.get('genre')]
 
         if self.request.get('adult') == 'Adult':
             params['certification'] = 'R'
