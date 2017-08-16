@@ -165,8 +165,7 @@ class RecHandler(webapp2.RequestHandler):
                 'movieposters': movieposters,
                 'posterurls': posterurls,
                 'company': company,
-
-                # 'cast': cast
+                'runtime': runtime
             }
             self.response.out.write(template.render(vars))
 
@@ -228,6 +227,14 @@ class RecHandler(webapp2.RequestHandler):
 
         if company != 'Any' and company != '  ':
             params['with_companies'] = companies[self.request.get('company')]
+
+        if self.request.get('runtime') == 'long':
+            params['with_runtime.gte'] = 120
+        elif self.request.get('runtime') == 'medium':
+            params['with_runtime.gte'] = 60
+            params['with_runtime.lte'] = 120
+        elif self.request.get('runtime') == 'short':
+            params['with_runtime.lte'] = 60
 
         # if cast
         #     params['with_people'] = self.request.get('cast').id
