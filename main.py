@@ -122,21 +122,6 @@ class RuntimeHandler(webapp2.RequestHandler):
             }
         self.response.out.write(template.render(vars))
 
-class CastHandler(webapp2.RequestHandler):
-    def post(self):
-        template = env.get_template('cast.html')
-        genre = self.request.get('genre')
-        adult = self.request.get('adult')
-        year = self.request.get('year')
-        company = self.request.get('company')
-        vars = {
-            'genre': genre,
-            'adult':adult,
-            'year': year,
-            'company': company
-            }
-        self.response.out.write(template.render(vars))
-
 class RecHandler(webapp2.RequestHandler):
     def post(self):
         template = env.get_template('recommendations.html')
