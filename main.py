@@ -169,8 +169,8 @@ class RecHandler(webapp2.RequestHandler):
                 if movie['poster_path']:
                     movies.append({
                         'url': "https://image.tmdb.org/t/p/w300/" + movie['poster_path'],
-                        'title': movie['title'],
-                        'overview': movie['overview']
+                        'title': clean(movie['title']),
+                        'overview': clean(movie['overview'])
                     })
 
             vars = {
@@ -256,7 +256,8 @@ class RecHandler(webapp2.RequestHandler):
         # genre_rec = self.response.out.write(self.request.get('genre'))
         # self.response.out.write(template.render())
 
-
+def clean(s):
+    return s.replace("'", "&#39;")
 
 app = webapp2.WSGIApplication([
     ('/test', MainHandler),

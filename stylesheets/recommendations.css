@@ -39,19 +39,19 @@ body{
     border-radius: 20px;
     margin: auto;
     display: block;
-    min-height: 500px;
-    max-height: 500px;
-    min-width: 500px;
-    max-width: 500px;
+    min-height: 600px;
+    max-height: 600px;
+    min-width: 600px;
+    max-width: 600px;
 }
 .overlay {
   background-color: rgba(0,0,0,.8);
   margin: auto;
   display: block;
-  min-height: 500px;
-  min-width: 500px;
-  max-width: 500px;
-  max-height: 500px;
+  min-height: 600px;
+  min-width: 600px;
+  max-width: 600px;
+  max-height: 600px;
 }
 
 
