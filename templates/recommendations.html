@@ -5,6 +5,8 @@
     <title>Your Movie Recs</title>
     <link rel='stylesheet' href='/resources/common.css'>
     <link rel='stylesheet' href='/resources/recommendations.css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="/javascript/recommendations.js"></script>
   </head>
 
   {% extends "base.html" %}
@@ -20,6 +22,23 @@
             <img class='poster' src="{{ url }}" height='300'></img>
       {% endfor %}
      </div>
+
+
+
+     <div id="myModal" class="modal">
+
+       <!-- The Close Button -->
+       <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
+
+       <!-- Modal Content (The Image) -->
+       <div class='modal-content' class='overlay' width='500'></div>
+
+       <!-- Modal Caption (Image Text) -->
+       <div id="caption"></div>
+     </div>
+
+
+
   </body>
 {% endblock %}
 
