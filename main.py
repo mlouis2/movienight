@@ -122,6 +122,21 @@ class RuntimeHandler(webapp2.RequestHandler):
             }
         self.response.out.write(template.render(vars))
 
+class CastHandler(webapp2.RequestHandler):
+    def post(self):
+        template = env.get_template('cast.html')
+        genre = self.request.get('genre')
+        adult = self.request.get('adult')
+        year = self.request.get('year')
+        company = self.request.get('company')
+        vars = {
+            'genre': genre,
+            'adult':adult,
+            'year': year,
+            'company': company
+            }
+        self.response.out.write(template.render(vars))
+
 class RecHandler(webapp2.RequestHandler):
     def post(self):
         template = env.get_template('recommendations.html')
@@ -133,14 +148,20 @@ class RecHandler(webapp2.RequestHandler):
         # cast = self.request.get('cast')
         def callback(response):
             print(str(response.body))
+            movieslist = []
             movies = []
             movieposters = []
             posterurls = []
             for movie in response.body['results']:
-                movies.append(movie['title'])
+                # movieslist.append[movie]
+                # movies.append(movie['title'])
                 movieposters.append(movie['poster_path'])
                 if movie['poster_path']:
-                    posterurls.append("https://image.tmdb.org/t/p/w300/" + movie['poster_path'])
+                    movies.append({
+                        'url': "https://image.tmdb.org/t/p/w300/" + movie['poster_path'],
+                        'title': movie['title'],
+                        'overview': movie['overview']
+                    })
 
             vars = {
                 'genre': genre,
@@ -150,7 +171,8 @@ class RecHandler(webapp2.RequestHandler):
                 'movieposters': movieposters,
                 'posterurls': posterurls,
                 'company': company,
-                'runtime': runtime
+
+                # 'cast': cast
             }
             self.response.out.write(template.render(vars))
 
@@ -212,14 +234,6 @@ class RecHandler(webapp2.RequestHandler):
 
         if company != 'Any' and company != '  ':
             params['with_companies'] = companies[self.request.get('company')]
-
-        if self.request.get('runtime') == 'long':
-            params['with_runtime.gte'] = 120
-        elif self.request.get('runtime') == 'medium':
-            params['with_runtime.gte'] = 60
-            params['with_runtime.lte'] = 120
-        elif self.request.get('runtime') == 'short':
-            params['with_runtime.lte'] = 60
 
         # if cast
         #     params['with_people'] = self.request.get('cast').id

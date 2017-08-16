@@ -12,6 +12,8 @@ function setUp() {
       modal.css({display: 'block'});
       modalImg.attr('src', $(this).attr('src'));
       console.log(modalImg);
+      $('#title').text($(this).attr('name'));
+      $('#overview').text($(this).attr('overview'));
       // captionText.innerHTML = $(this).alt;
   });
 

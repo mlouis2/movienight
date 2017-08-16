@@ -56,8 +56,11 @@ body{
 
 
 /* Caption of Modal Image (Image Text) - Same Width as the Image */
-#caption {
+#title {
     margin: auto;
+    font-family: American Typewriter;
+    font-size: 30px;
+    text-decoration: underline;
     display: block;
     width: 80%;
     max-width: 700px;
@@ -67,8 +70,26 @@ body{
     height: 150px;
 }
 
+#overview{
+  margin: auto;
+  font-family: American Typewriter;
+  font-size: 18px;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  min-height: 700px;
+  text-align: center;
+  color: #ccc;
+}
+
 /* Add Animation - Zoom in the Modal */
-.modal-content, #caption {
+.modal-content, #title {
+    -webkit-animation-name: zoom;
+    -webkit-animation-duration: 0.6s;
+    animation-name: zoom;
+    animation-duration: 0.6s;
+}
+.modal-content, #overview {
     -webkit-animation-name: zoom;
     -webkit-animation-duration: 0.6s;
     animation-name: zoom;
