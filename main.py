@@ -216,7 +216,7 @@ class RecHandler(webapp2.RequestHandler):
             'Paramount': 4,
             'DreamWorks': 7,
             'Universal': 13,
-            'Fox': 25,
+            'Metro': 21,
         }
 
         # New is past year
@@ -236,7 +236,7 @@ class RecHandler(webapp2.RequestHandler):
             params['certification'] = 'G'
 
         if self.request.get('year') == 'new':
-            params['primary_release_year'] = 2017
+            params['primary_release_year.gte'] = 2016
         elif self.request.get('year') == 'recent':
             params['primary_release_date.gte'] = recent
         elif self.request.get('year') == 'old':
