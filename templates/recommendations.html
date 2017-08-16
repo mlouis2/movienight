@@ -11,16 +11,15 @@
 
 {% block content %}
   <body>
-    Your recommendations are:
+    <!-- Your recommendations are:
     {% for m in movies %}
           {{ m }},
-    {% endfor %}
-
-    {% for url in posterurls %}
-          <p>
-          <img src="{{ url }}"></img>
-          </p>
-     {% endfor %}
+    {% endfor %} -->
+    <div id='movie'>
+      {% for url in posterurls %}
+            <img class='poster' src="{{ url }}" height='300'></img>
+      {% endfor %}
+     </div>
   </body>
 {% endblock %}
 
