@@ -242,6 +242,14 @@ class RecHandler(webapp2.RequestHandler):
         elif self.request.get('year') == 'old':
             params['primary_release_date.lte'] = old
 
+        if self.request.get('runtime') == 'long':
+            params['with_runtime.gte'] = 120
+        elif self.request.get('runtime') == 'medium':
+            params['with_runtime.gte'] = 60
+            params['with_runtime.lte'] = 120
+        elif self.request.get('runtime') == 'short':
+            params['with_runtime.lte'] = 60
+
         if company != 'Any' and company != '  ':
             params['with_companies'] = companies[self.request.get('company')]
 
