@@ -267,6 +267,12 @@ class RecHandler(webapp2.RequestHandler):
 def clean(s):
     return s.replace("'", "&#39;")
 
+class WatchListHandler(webapp2.RequestHandler):
+    def get(self):
+        template = env.get_template('watchlist.html')
+        self.response.write(template.render())
+
+
 app = webapp2.WSGIApplication([
     ('/test', MainHandler),
     ('/', HomeHandler),
@@ -277,6 +283,7 @@ app = webapp2.WSGIApplication([
     ('/companies', CompaniesHandler),
     # ('/cast', CastHandler),
     ('/recommendations', RecHandler),
+    ('/watchlist', WatchListHandler),
     ('/runtime', RuntimeHandler),
     ('/login', UserHandler)
 ], debug=True)
