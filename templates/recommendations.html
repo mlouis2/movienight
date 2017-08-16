@@ -15,6 +15,9 @@
   <body>
 
     <div id='movie'>
+
+
+
       {% for m in movies %}
           <img name='{{ m.title }}' overview='{{m.overview}}' class='poster' src='{{ m.url }}' height='300'></img>
       {% endfor %}

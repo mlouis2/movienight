@@ -26,6 +26,7 @@ from google.appengine.api import urlfetch
 from datetime import datetime, date
 # from user import User
 from google.appengine.api import users
+from google.appengine.ext import ndb
 
 env = jinja2.Environment(loader=jinja2.FileSystemLoader('templates'))
 
@@ -44,14 +45,6 @@ class MainHandler(webapp2.RequestHandler):
 
 class HomeHandler(webapp2.RequestHandler):
     def get(self):
-        # user = users.get_current_user()
-        # if user:
-        #     greeting = ('Welcome, %s! (<a href="%s">sign out</a>)' %
-        #         (user.nickname(), users.create_logout_url('/')))
-        # else:
-        #     greeting = ('<a href="%s">Sign in or register</a>.' %
-        #         users.create_login_url('/'))
-        # #self.response.write('<html><body>%s</body></html>' % greeting)
         template = env.get_template('home.html')
         self.response.out.write(template.render())
 
@@ -155,16 +148,12 @@ class RecHandler(webapp2.RequestHandler):
         year = self.request.get('year')
         company = self.request.get('company')
         runtime = self.request.get('runtime')
-        # cast = self.request.get('cast')
+
         def callback(response):
             print(str(response.body))
-            movieslist = []
             movies = []
             movieposters = []
-            posterurls = []
             for movie in response.body['results']:
-                # movieslist.append[movie]
-                # movies.append(movie['title'])
                 movieposters.append(movie['poster_path'])
                 if movie['poster_path']:
                     movies.append({
@@ -179,12 +168,15 @@ class RecHandler(webapp2.RequestHandler):
                 'year': year,
                 'movies': movies,
                 'movieposters': movieposters,
-                'posterurls': posterurls,
                 'company': company,
-
-                # 'cast': cast
             }
-            self.response.out.write(template.render(vars))
+
+            if len(movies) > 0:
+                self.response.out.write(template.render(vars))
+            else:
+                self.response.out.write("Sorry, no results for those parameters!")
+                self.response.out.write(template.render(vars))
+
 
         base_url = 'https://api.themoviedb.org/3/discover/movie'
 
@@ -253,25 +245,16 @@ class RecHandler(webapp2.RequestHandler):
         if company != 'Any' and company != '  ':
             params['with_companies'] = companies[self.request.get('company')]
 
-        # if cast
-        #     params['with_people'] = self.request.get('cast').id
-
-
-
         response = unirest.get(base_url, params = params, callback = callback)
         time.sleep(1)
-
-        # genre_rec = self.response.out.write(self.request.get('genre'))
-        # self.response.out.write(template.render())
 
 def clean(s):
     return s.replace("'", "&#39;")
 
-class WatchListHandler(webapp2.RequestHandler):
+class HistoryHandler(webapp2.RequestHandler):
     def get(self):
-        template = env.get_template('watchlist.html')
+        template = env.get_template('history.html')
         self.response.write(template.render())
-
 
 app = webapp2.WSGIApplication([
     ('/test', MainHandler),
@@ -283,7 +266,7 @@ app = webapp2.WSGIApplication([
     ('/companies', CompaniesHandler),
     # ('/cast', CastHandler),
     ('/recommendations', RecHandler),
-    ('/watchlist', WatchListHandler),
     ('/runtime', RuntimeHandler),
-    ('/login', UserHandler)
+    ('/login', UserHandler),
+    ('/history', HistoryHandler)
 ], debug=True)
