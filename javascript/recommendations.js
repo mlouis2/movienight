@@ -17,6 +17,18 @@ function setUp() {
       // captionText.innerHTML = $(this).alt;
   });
 
+  // $('img.poster').on('mouseenter', function (e) {
+  //   var checkbox = $(this).next();
+  //   console.log('entering', e.target.tagName, 'checkbox is ', checkbox.tagName);
+  //   checkbox.css({visibility: 'visible'});
+  // });
+  //
+  // $('img.poster').on('mouseout', function (e) {
+  //   var checkbox = $(this).next();
+  //   console.log('leaving', e.target.tagName, 'checkbox is ', checkbox.tagName);
+  //   checkbox.css({visibility: 'hidden'});
+  // })
+  //
   // Get the <span> element that closes the modal
   var span = $("#close")[0];
 

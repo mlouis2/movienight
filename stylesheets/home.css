@@ -1,6 +1,7 @@
 body{
   font-family: Avenir Next;
   margin: 0;
+  background: url('/images/popcornbackground.jpg');
 }
 #name{
   color: #D12C2C;
@@ -21,6 +22,13 @@ left: 120px;
   max-width: 80%;
 }
 
+.movie_night{
+  font-weight: lighter;
+  position: relative;
+  top: 50px;
+  font-size: 80px;
+  text-shadow: 0 0 4px rgba(209, 44, 44, .5)
+}
 
 
 
