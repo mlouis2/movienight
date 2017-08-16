@@ -13,13 +13,14 @@
 
 {% block content %}
   <body>
-
-    <div id='movie'>
-      {% for m in movies %}
-          <img name='{{ m.title }}' overview='{{m.overview}}' class='poster' src='{{ m.url }}' height='300'></img>
-      {% endfor %}
-     </div>
-
+      <div id='movie'>
+        {% for m in movies %}
+          <div class='container'>
+              <img name='{{ m.title }}' overview='{{m.overview}}' class='poster' src='{{ m.url }}' height='300'></img>
+              <input class='has_watched_box' title='Want to see?' type='checkbox'></input>
+          </div>
+        {% endfor %}
+      </div>
 
 
      <div id="myModal" class="modal">
@@ -36,6 +37,7 @@
               {{ m }}
           {% endfor %}
         </div>
+
         <div id='overview'>
           {% for m in movies %}
               {{ m }}
