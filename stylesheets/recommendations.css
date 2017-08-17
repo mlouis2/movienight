@@ -96,7 +96,13 @@ body{
   padding: 10px;
   opacity: .9;
 }
-
+.delete_box{
+  position: absolute;
+  bottom: 30px;
+  left: 5px;
+  padding: 10px;
+  opacity: .9;
+}
 .has_watched_box:hover{
   cursor: pointer;
 }
