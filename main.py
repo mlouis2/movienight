@@ -25,7 +25,6 @@ import time
 from user import User
 from google.appengine.api import urlfetch
 from datetime import datetime, date
-# from user import User
 from google.appengine.api import users
 from google.appengine.ext import ndb
 
@@ -191,13 +190,10 @@ class RecHandler(webapp2.RequestHandler):
                 self.response.out.write(template.render(vars))
             else:
                 vars['results'] = 'Sorry, no results for those parameters!'
-                #self.response.out.write("Sorry, no results for those parameters!")
                 self.response.out.write(template.render(vars))
-
 
         base_url = 'https://api.themoviedb.org/3/discover/movie'
 
-        #Dictionary of genres
         genres = {
             'Action': 28,
             'Adventure': 12,
@@ -228,9 +224,7 @@ class RecHandler(webapp2.RequestHandler):
             'Metro': 21,
         }
 
-        # New is past year
-        # Recent is past ten years
-        # Old is older
+        new = date(2016, 1, 1)
         recent = date(2007, 1, 1)
         old = date(2006, 1, 1)
 
@@ -245,7 +239,7 @@ class RecHandler(webapp2.RequestHandler):
             params['certification'] = 'G'
 
         if self.request.get('year') == 'new':
-            params['primary_release_year.gte'] = 2016
+            params['primary_release_date.gte'] = new
         elif self.request.get('year') == 'recent':
             params['primary_release_date.gte'] = recent
         elif self.request.get('year') == 'old':
