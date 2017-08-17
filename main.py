@@ -22,6 +22,7 @@ import urllib
 import urllib2
 import unirest
 import time
+from user import User
 from google.appengine.api import urlfetch
 from datetime import datetime, date
 # from user import User
@@ -46,6 +47,19 @@ class MainHandler(webapp2.RequestHandler):
 class HomeHandler(webapp2.RequestHandler):
     def get(self):
         template = env.get_template('home.html')
+
+        user = users.get_current_user()
+        if user:
+            u = User.query(User.email == user.email()).get()
+            if u:
+                pass
+            else:
+                user_object = User(
+                    email= user.email(),
+                    history= [],
+                )
+                user_object.put()
+
         self.response.out.write(template.render())
 
 class UserHandler (webapp2.RequestHandler):
@@ -54,6 +68,7 @@ class UserHandler (webapp2.RequestHandler):
         if user:
             greeting = ('Welcome, %s! (<a href="%s">sign out</a>)' %
                 (user.nickname(), users.create_logout_url('/')))
+
         else:
             greeting = ('<a href="%s">Sign in or register</a>.' %
                 users.create_login_url('/'))
@@ -262,9 +277,7 @@ app = webapp2.WSGIApplication([
     ('/genre', GenreHandler),
     ('/adult', AdultHandler),
     ('/year', YearHandler),
-    # ('/reviews', ReviewsHandler),
     ('/companies', CompaniesHandler),
-    # ('/cast', CastHandler),
     ('/recommendations', RecHandler),
     ('/runtime', RuntimeHandler),
     ('/login', UserHandler),
