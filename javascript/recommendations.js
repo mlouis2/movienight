@@ -9,6 +9,9 @@ function setUp() {
   var captionText = $("#caption");
 
   $('.has_watched_box').on('change', registerWatch);
+  $('.delete_box').on('change', function(){
+    $(this).parent().fadeOut(1000);
+  });
   $('.delete_box').on('change', deleteWatch);
 
   pic.on('click', function(){

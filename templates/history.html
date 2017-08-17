@@ -15,7 +15,7 @@
        <body>
            <div id='movie'>
              {% for m in movies %}
-               <div class='container'>
+               <div id='{{ m.movie_id }}'class='container'>
                    <img name='{{ m.title }}' overview='{{m.overview}}' class='poster' src='{{ m.url }}' height='300'></img>
                    <input class='delete_box' title='Remove from Watchlist' type='checkbox' value= '{{ m.movie_id }}' checked='checked'></input>
                </div>
