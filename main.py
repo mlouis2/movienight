@@ -114,7 +114,7 @@ class ReviewsHandler(webapp2.RequestHandler):
 
 class CompaniesHandler(webapp2.RequestHandler):
     def post(self):
-        template = env.get_template('companies.html')
+        template = env.get_template('Companies.html')
         genre = self.request.get('genre')
         adult = self.request.get('adult')
         year = self.request.get('year')
@@ -268,8 +268,17 @@ class HistoryHandler(webapp2.RequestHandler):
     def get(self):
         template = env.get_template('history.html')
         # self.response.write(template.render())
-        q = Watch.query()
+
+        user = users.get_current_user().user_id()
+        # user_query = User.query(User.email == user.email())
+        # user_results = user_query.get()
+        # self.response.write(user_results)
+
+        q = Watch.query(Watch.user_id == user)
         results = q.fetch()
+
+        # self.response.write(results)
+
 
         movie_ids = []
         movie_paths = []
@@ -304,7 +313,7 @@ class HistoryHandler(webapp2.RequestHandler):
         user_id = users.get_current_user().user_id()
         movie_id = int(self.request.get('val'))
 
-        q = Watch.query()
+        q = Watch.query(Watch.user_id == user_id)
         results = q.fetch()
         movieids = []
         exists = False
