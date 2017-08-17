@@ -46,3 +46,13 @@ body{
   bottom: 50;
   right: 0%;
 }
+
+button:hover {
+  opacity: .5;
+  color: black;
+  cursor: pointer;
+}
+
+button[type=begin_search]:focus{
+  outline: 2px solid white;
+}
