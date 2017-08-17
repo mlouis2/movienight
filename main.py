@@ -189,7 +189,7 @@ class RecHandler(webapp2.RequestHandler):
                 vars['results'] = ''
                 self.response.out.write(template.render(vars))
             else:
-                vars['results'] = 'Sorry, no results for those parameters!'
+                vars['results'] = 'Sorry, no results for those parameters! Please try again.'
                 self.response.out.write(template.render(vars))
 
         base_url = 'https://api.themoviedb.org/3/discover/movie'
