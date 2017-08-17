@@ -4,8 +4,8 @@ body{
 
 #movie{
   display: block;
-  position: absolute;
-  top: 150px;
+  position: relative;
+  top: 50px;
   margin: auto;
   text-align: center;
 }
@@ -19,6 +19,7 @@ body{
 
 .poster:hover{
   opacity:0.4;
+  cursor: pointer;
 }
 
 /* The Modal (background) */
@@ -94,6 +95,10 @@ body{
   left: 5px;
   padding: 10px;
   opacity: .9;
+}
+
+.has_watched_box:hover{
+  cursor: pointer;
 }
 
 input[type="checkbox"] {
