@@ -159,3 +159,8 @@ input[type="checkbox"] {
         width: 100%;
     }
 }
+.no_results{
+  font-family: American Typewriter;
+  font-size: 50px;
+  opacity: .5;
+}

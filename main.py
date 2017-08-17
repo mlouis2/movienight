@@ -190,7 +190,7 @@ class RecHandler(webapp2.RequestHandler):
                 vars['results'] = ''
                 self.response.out.write(template.render(vars))
             else:
-                vars['results'] = 'Sorry, no results for those parameters!'
+                vars['results'] = 'Sorry, no results for those parameters! Please try again.'
                 #self.response.out.write("Sorry, no results for those parameters!")
                 self.response.out.write(template.render(vars))
 
