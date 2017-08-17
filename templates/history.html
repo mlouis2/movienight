@@ -3,8 +3,50 @@
      <head>
           <meta charset="utf-8">
           <title>My Movies</title>
+          <link rel='stylesheet' href='/resources/common.css'>
+          <link rel='stylesheet' href='/resources/recommendations.css'>
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+          <script src="/javascript/recommendations.js"></script>
      </head>
-     <body>
-          
-     </body>
+
+  {% extends "base.html" %}
+
+     {% block content %}
+       <body>
+           <div id='movie'>
+             {% for m in movies %}
+               <div class='container'>
+                   <img name='{{ m.title }}' overview='{{m.overview}}' class='poster' src='{{ m.url }}' height='300'></img>
+
+               </div>
+             {% endfor %}
+           </div>
+
+
+          <div id="myModal" class="modal">
+
+            <!-- The Close Button -->
+            <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
+
+            <!-- Modal Content (The Image) -->
+            <div class='modal-content' class='overlay' width='500'>
+
+            <!-- Modal Caption (Image Text) -->
+             <div id="title">
+               {% for m in movies %}
+                   {{ m }}
+               {% endfor %}
+             </div>
+
+             <div id='overview'>
+               {% for m in movies %}
+                   {{ m }}
+               {% endfor %}
+            </div>
+          </div>
+
+
+
+       </body>
+     {% endblock %}
 </html>
