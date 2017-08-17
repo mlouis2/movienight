@@ -302,7 +302,7 @@ class HistoryHandler(webapp2.RequestHandler):
             url = base_url + str(result.movie_id)
             response = unirest.get(url, params = params, callback = callback)
 
-        time.sleep(3)
+        time.sleep(1)
         vars = {
             'movies': movies
         }
@@ -310,22 +310,31 @@ class HistoryHandler(webapp2.RequestHandler):
         self.response.out.write(template.render(vars))
 
     def post(self):
-        user_id = users.get_current_user().user_id()
-        movie_id = int(self.request.get('val'))
+        print(self.request.get('type'))
+        if self.request.get('type') == 'add':
+            print('adding...')
+            user_id = users.get_current_user().user_id()
+            movie_id = int(self.request.get('val'))
 
-        q = Watch.query(Watch.user_id == user_id)
-        results = q.fetch()
-        movieids = []
-        exists = False
-        for result in results:
-            movieids.append(result.movie_id)
+            q = Watch.query(Watch.user_id == user_id)
+            results = q.fetch()
+            movieids = []
+            exists = False
+            for result in results:
+                movieids.append(result.movie_id)
 
-        for movieid in movieids:
-            if movie_id == movieid:
-                exists = True
+            for movieid in movieids:
+                if movie_id == movieid:
+                    exists = True
 
-        if exists != True:
-            Watch(user_id = user_id, movie_id = movie_id).put()
+            if exists != True:
+                Watch(user_id = user_id, movie_id = movie_id).put()
+        elif self.request.get('type') == 'remove':
+            user_id = users.get_current_user().user_id()
+            movie_id = int(self.request.get('val'))
+            watch = Watch.query(Watch.movie_id == movie_id, Watch.user_id == user_id).get()
+            watch.key.delete()
+
 
 app = webapp2.WSGIApplication([
     ('/test', MainHandler),

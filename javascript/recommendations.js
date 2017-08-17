@@ -9,6 +9,7 @@ function setUp() {
   var captionText = $("#caption");
 
   $('.has_watched_box').on('change', registerWatch);
+  $('.delete_box').on('change', deleteWatch);
 
   pic.on('click', function(){
     console.log($(this).attr('src'));
@@ -17,24 +18,7 @@ function setUp() {
       console.log(modalImg);
       $('#title').text($(this).attr('name'));
       $('#overview').text($(this).attr('overview'));
-      // captionText.innerHTML = $(this).alt;
 
-
-
-
-  // $('img.poster').on('mouseenter', function (e) {
-  //   var checkbox = $(this).next();
-  //   console.log('entering', e.target.tagName, 'checkbox is ', checkbox.tagName);
-  //   checkbox.css({visibility: 'visible'});
-  // });
-  //
-  // $('img.poster').on('mouseout', function (e) {
-  //   var checkbox = $(this).next();
-  //   console.log('leaving', e.target.tagName, 'checkbox is ', checkbox.tagName);
-  //   checkbox.css({visibility: 'hidden'});
-  // })
-  //
-  // Get the <span> element that closes the modal
   var span = $("#close")[0];
 
   // When the user clicks on <span> (x), close the modal
@@ -45,12 +29,40 @@ function setUp() {
 }
 
 function registerWatch(){
-     // $('#title').text($(this).attr('name'));
      console.log($(this).val());
-     $.post("/history", {
-          'val': $(this).val()
-     });
-     // console.log($(this).attr('value'));
+     // $.post("/history", {
+     //      'val': $(this).val()
+     // });
+     $.ajax("/history", {
+          data: {
+               'type': 'add',
+               'val': $(this).val()
+          },
+          method: 'POST'
+     })
+}
+
+function deleteWatch() {
+     console.log($(this).val());
+     // $.delete("/history", {
+     //      'val': $(this).val()
+     // });
+
+     $.ajax("/history", {
+          data: {
+               'type': 'remove',
+               'val': $(this).val()
+          },
+          method: 'POST'
+     })
+
+     // $.ajax({
+     //      val: $(this).val(),
+     //      url: '/history',
+     //      type: 'DELETE',
+     //      success: function(data) {
+     //      }
+     // });
 }
 
 $(document).on('ready', setUp)
