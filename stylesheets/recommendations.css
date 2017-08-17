@@ -4,8 +4,8 @@ body{
 
 #movie{
   display: block;
-  position: absolute;
-  top: 150px;
+  position: relative;
+  top: 50px;
   margin: auto;
   text-align: center;
 }
@@ -19,6 +19,7 @@ body{
 
 .poster:hover{
   opacity:0.4;
+  cursor: pointer;
 }
 
 /* The Modal (background) */
@@ -96,6 +97,10 @@ body{
   opacity: .9;
 }
 
+.has_watched_box:hover{
+  cursor: pointer;
+}
+
 input[type="checkbox"] {
   transform:scale(2, 2);
 }
@@ -137,13 +142,15 @@ input[type="checkbox"] {
 
 /* The Close Button */
 .close {
-    position: absolute;
-    top: 15px;
-    right: 35px;
+    position: relative;
     color: #f1f1f1;
     font-size: 40px;
     font-weight: bold;
     transition: 0.3s;
+    margin: 20px;
+    font-family: American Typewriter;
+    display: block;
+    color: #ccc;
 }
 
 .close:hover,
