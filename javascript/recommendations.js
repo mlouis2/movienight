@@ -7,6 +7,9 @@ function setUp() {
   var pic = $('.poster');
   var modalImg = $('.modal-content');
   var captionText = $("#caption");
+
+  $('.has_watched_box').on('change', registerWatch);
+
   pic.on('click', function(){
     console.log($(this).attr('src'));
       modal.css({display: 'block'});
@@ -15,7 +18,9 @@ function setUp() {
       $('#title').text($(this).attr('name'));
       $('#overview').text($(this).attr('overview'));
       // captionText.innerHTML = $(this).alt;
-  });
+
+
+
 
   // $('img.poster').on('mouseenter', function (e) {
   //   var checkbox = $(this).next();
@@ -36,7 +41,16 @@ function setUp() {
   $(span).on('click', function() {
     modal.css({display: 'block'});
   });
+});
+}
 
+function registerWatch(){
+     // $('#title').text($(this).attr('name'));
+     console.log($(this).val());
+     $.post("/history", {
+          'val': $(this).val()
+     });
+     // console.log($(this).attr('value'));
 }
 
 $(document).on('ready', setUp)

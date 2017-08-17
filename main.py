@@ -22,7 +22,8 @@ import urllib
 import urllib2
 import unirest
 import time
-from user import User
+from watch import User
+from watch import Watch
 from google.appengine.api import urlfetch
 from datetime import datetime, date
 from google.appengine.api import users
@@ -167,15 +168,16 @@ class RecHandler(webapp2.RequestHandler):
             print(str(response.body))
             movies = []
             movieposters = []
+            # self.response.write(movies)
             for movie in response.body['results']:
                 movieposters.append(movie['poster_path'])
                 if movie['poster_path']:
                     movies.append({
                         'url': "https://image.tmdb.org/t/p/w300/" + movie['poster_path'],
                         'title': clean(movie['title']),
-                        'overview': clean(movie['overview'])
+                        'overview': clean(movie['overview']),
+                        'movie_id': movie['id']
                     })
-
             vars = {
                 'genre': genre,
                 'adult': adult,
@@ -266,6 +268,11 @@ class HistoryHandler(webapp2.RequestHandler):
     def get(self):
         template = env.get_template('history.html')
         self.response.write(template.render())
+    def post(self):
+        user_id = users.get_current_user().user_id()
+        movie_id = int(self.request.get('val'))
+        Watch(user_id = user_id, movie_id = movie_id).put()
+
 
 app = webapp2.WSGIApplication([
     ('/test', MainHandler),
