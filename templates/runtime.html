@@ -3,7 +3,10 @@
   <head>
     <meta charset="utf-8">
     <title>Runtime Form</title>
+    <link rel='stylesheet' href='/resources/common.css'>
     <link rel='stylesheet' href='/resources/runtime.css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="/javascript/common.js"></script>
   </head>
 
   {% extends "base.html" %}
@@ -26,6 +29,16 @@
       <input type="hidden" name="year" value={{year}}>
       <input type="hidden" name="company" value={{company}}>
     </form>
+
+
+    <div id='Gallery'>
+      <img id='one' class='photo' src='/images/homealone.jpg' height='250'>
+      <img id='two' class='photo' src='/images/soundofmusic.jpg' height='250'>
+      <img id='three' class='photo' src='/images/vangeva.jpg' height='250'>
+      <img id='four' class='photo' src='/images/wizardofoz.jpg' height='250'>
+      <img id='five' class='photo' src='/images/grease.jpg' height='250'>
+      <img id='six' class='photo' src='/images/toystory.jpg' height='250'>
+    </div>
   </body>
 {% endblock %}
 
