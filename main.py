@@ -232,7 +232,7 @@ class RecHandler(webapp2.RequestHandler):
 
         params = {'api_key': '908b04b14312a6971d28a297db411fd7', 'certification_country': 'US'}
 
-        if self.request.get('genre') != '  ' and self.request.get('genre') != 'Any':
+        if self.request.get('genre') != '' and self.request.get('genre') != 'Any':
             params['with_genres'] = genres[self.request.get('genre')]
 
         if self.request.get('adult') == 'Adult':
@@ -255,7 +255,7 @@ class RecHandler(webapp2.RequestHandler):
         elif self.request.get('runtime') == 'short':
             params['with_runtime.lte'] = 60
 
-        if company != 'Any' and company != '  ':
+        if company != 'Any' and company != '':
             params['with_companies'] = companies[self.request.get('company')]
 
         response = unirest.get(base_url, params = params, callback = callback)
