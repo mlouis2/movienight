@@ -187,9 +187,11 @@ class RecHandler(webapp2.RequestHandler):
             }
 
             if len(movies) > 0:
+                vars['results'] = ''
                 self.response.out.write(template.render(vars))
             else:
-                self.response.out.write("Sorry, no results for those parameters!")
+                vars['results'] = 'Sorry, no results for those parameters!'
+                #self.response.out.write("Sorry, no results for those parameters!")
                 self.response.out.write(template.render(vars))
 
 
