@@ -66,8 +66,8 @@ class UserHandler (webapp2.RequestHandler):
     def get(self):
         user = users.get_current_user()
         if user:
-            greeting = ('Welcome, %s! (<a href="%s">sign out</a>)' %
-                (user.nickname(), users.create_logout_url('/')))
+            greeting = ('<a href="%s">Are you sure you want to sign out?</a>' %
+                (users.create_logout_url('/')))
 
         else:
             greeting = ('<a href="%s">Sign in or register</a>.' %
@@ -269,39 +269,28 @@ class HistoryHandler(webapp2.RequestHandler):
         template = env.get_template('history.html')
         # self.response.write(template.render())
         q = Watch.query()
-        results = q.fetch(limit=40)
+        results = q.fetch()
 
         movie_ids = []
         movie_paths = []
         movie_list = []
         movies = []
 
-        # for movie in results:
-        #     movie_ids.append(movie.movie_id)
-
         def callback(response):
-            # self.response.out.write(response)
             movie = response.body
-
-            # for movie in response.body:
-
-            # self.response.out.write('\n')
             movies.append({
                 'url': "https://image.tmdb.org/t/p/w300/" + movie['poster_path'],
                 'title': clean(movie['title']),
                 'overview': clean(movie['overview']),
                 'movie_id': movie['id']
             })
-            # print(movies)
 
-            #  https://api.themoviedb.org/3/movie/20?api_key=908b04b14312a6971d28a297db411fd7&language=en-US
         base_url = 'https://api.themoviedb.org/3/movie/'
         params = {'api_key': '908b04b14312a6971d28a297db411fd7'}
 
 
         for result in results:
             url = base_url + str(result.movie_id)
-            # self.response.write('<br>' + url)
             response = unirest.get(url, params = params, callback = callback)
 
         time.sleep(3)
@@ -314,7 +303,20 @@ class HistoryHandler(webapp2.RequestHandler):
     def post(self):
         user_id = users.get_current_user().user_id()
         movie_id = int(self.request.get('val'))
-        Watch(user_id = user_id, movie_id = movie_id).put()
+
+        q = Watch.query()
+        results = q.fetch()
+        movieids = []
+        exists = False
+        for result in results:
+            movieids.append(result.movie_id)
+
+        for movieid in movieids:
+            if movie_id == movieid:
+                exists = True
+
+        if exists != True:
+            Watch(user_id = user_id, movie_id = movie_id).put()
 
 app = webapp2.WSGIApplication([
     ('/test', MainHandler),
@@ -325,6 +327,6 @@ app = webapp2.WSGIApplication([
     ('/companies', CompaniesHandler),
     ('/recommendations', RecHandler),
     ('/runtime', RuntimeHandler),
-    ('/login', UserHandler),
+    ('/logout', UserHandler),
     ('/history', HistoryHandler)
 ], debug=True)
