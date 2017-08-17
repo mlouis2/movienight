@@ -221,9 +221,10 @@ class RecHandler(webapp2.RequestHandler):
         companies = {
             'Disney': 2,
             'Paramount': 4,
-            'DreamWorks': 7,
-            'Universal': 13,
-            'Metro': 21,
+            'Pixar': 3,
+            'NewLineCinema': 12,
+            'WarnerBros': 6194,
+            'Fox': 306
         }
 
         new = date(2016, 1, 1)
@@ -235,10 +236,14 @@ class RecHandler(webapp2.RequestHandler):
         if self.request.get('genre') != '' and self.request.get('genre') != 'Any':
             params['with_genres'] = genres[self.request.get('genre')]
 
-        if self.request.get('adult') == 'Adult':
-            params['certification'] = 'R'
-        elif self.request.get('adult') == 'Kid':
+        if self.request.get('adult') == 'G':
             params['certification'] = 'G'
+        elif self.request.get('adult') == 'PG':
+            params['certification'] = 'PG'
+        elif self.request.get('adult') == 'PG-13':
+            params['certification'] = 'PG-13'
+        elif self.request.get('adult') == 'R':
+            params['certification'] = 'R'
 
         if self.request.get('year') == 'new':
             params['primary_release_date.gte'] = new
@@ -312,7 +317,6 @@ class HistoryHandler(webapp2.RequestHandler):
     def post(self):
         print(self.request.get('type'))
         if self.request.get('type') == 'add':
-            print('adding...')
             user_id = users.get_current_user().user_id()
             movie_id = int(self.request.get('val'))
 

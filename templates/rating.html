@@ -13,13 +13,18 @@
 
 {% block content %}
   <body>
-    <h1>What Rating are You Looking For?</h1>
+    <h1>What Rating Are You Looking For?</h1>
     <form id='Ratings' method="post" action='/year'>
       <p><select form_id='Ratings' id='Box' class='adult' name='adult'>
           <option id='text' value='  '>  </option>
+          <!-- <option id='text' value='Any'>ALL</option>
+          <option id='text' value='Kid'>G</option> -->
           <option id='text' value='Any'>ALL</option>
-          <option id='text' value='Adult'>R</option>
-          <option id='text' value='Kid'>G/PG</option>
+          <option id='text' value='G'>G</option>
+          <option id='text' value='PG'>PG</option>
+          <option id='text' value='PG-13'>PG-13</option>
+          <option id='text' value='R'>R</option>
+          <!-- <option id='text' value='Adult'>R</option> -->
         </p>
       <p><input id='submit' type='submit'></p>
       <input type="hidden" name="genre" value={{genre}}>
